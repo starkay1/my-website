@@ -28,6 +28,11 @@ interface RouteParams {
   };
 }
 
+// 为静态导出生成参数 - 职位API不需要静态生成
+export async function generateStaticParams() {
+  return [];
+}
+
 // GET - 获取单个职位
 export async function GET(
   request: NextRequest,

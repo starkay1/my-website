@@ -48,6 +48,11 @@ interface CardMediaProps extends ComponentProps {
   children?: React.ReactNode;
 }
 
+interface CardTitleProps extends ComponentProps {
+  children: React.ReactNode;
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+}
+
 // 样式配置
 const cardVariants: Record<CardVariant, string> = {
   default: 'bg-white border border-neutral-200',
@@ -326,6 +331,26 @@ const CardMedia = React.forwardRef<HTMLDivElement, CardMediaProps>(
 
 CardMedia.displayName = 'CardMedia';
 
+// Card Title Component
+const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
+  ({ children, as: Component = 'h3', className, ...props }, ref) => {
+    return (
+      <Component
+        ref={ref as any}
+        className={cn(
+          'text-lg font-semibold leading-none tracking-tight',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </Component>
+    );
+  }
+);
+
+CardTitle.displayName = 'CardTitle';
+
 // 卡片分隔线组件
 const CardDivider: React.FC<ComponentProps> = ({ className, ...props }) => {
   return (
@@ -387,6 +412,7 @@ export {
   CardContent,
   CardFooter,
   CardMedia,
+  CardTitle,
   CardDivider,
   CardGroup,
 };
@@ -397,6 +423,7 @@ export type {
   CardContentProps,
   CardFooterProps,
   CardMediaProps,
+  CardTitleProps,
   CardGroupProps,
   CardVariant,
   CardSize,

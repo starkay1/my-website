@@ -4,6 +4,11 @@ import { existsSync } from 'fs';
 import { db } from '@/lib/database';
 import { authenticateRequest } from '@/lib/auth';
 
+// 为静态导出生成参数 - 文件下载API不需要静态生成
+export async function generateStaticParams() {
+  return [];
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }

@@ -1,6 +1,20 @@
 // Polyfills for server-side rendering
-if (typeof global !== 'undefined' && typeof global.self === 'undefined') {
-  global.self = global;
+if (typeof global !== 'undefined') {
+  if (typeof global.self === 'undefined') {
+    global.self = global;
+  }
+  if (typeof self === 'undefined') {
+    global.self = global;
+  }
+}
+
+// 确保 self 在所有环境中都可用
+if (typeof self === 'undefined') {
+  if (typeof global !== 'undefined') {
+    global.self = global;
+  } else if (typeof window !== 'undefined') {
+    window.self = window;
+  }
 }
 
 if (typeof window === 'undefined') {

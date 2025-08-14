@@ -135,7 +135,7 @@ model User {
   email       String   @unique
   password    String
   name        String
-  role        String   @default("user") // user, hr, admin
+  role        String   @default("user") // user, hr, admin, editor
   avatar      String?
   phone       String?
   createdAt   DateTime @default(now())
@@ -144,6 +144,8 @@ model User {
   // Relations
   applications JobApplication[]
   createdJobs  Job[] @relation("JobCreator")
+  contents     Content[] @relation("ContentAuthor")
+  uploadedMedia Media[] @relation("MediaUploader")
 }
 
 model Job {
@@ -216,4 +218,54 @@ model Homepage {
   isActive       Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+// 内容管理系统模型
+model Content {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String
+  content       String
+  excerpt       String?
+  status        String   @default("draft") // draft, published, archived
+  type          String   // page, post, service, case_study, news
+  locale        String   @default("en") // en, zh-CN, th
+  featuredImage String?
+  seoTitle      String?
+  seoDescription String?
+  tags          Json?    // store string[] as JSON
+  categories    Json?    // store string[] as JSON
+  publishedAt   DateTime?
+  authorId      String
+  metadata      Json?    // 额外的元数据
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  author        User     @relation("ContentAuthor", fields: [authorId], references: [id])
+  
+  @@unique([slug, locale, type])
+  @@index([status, type, locale])
+  @@index([publishedAt])
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  url          String
+  alt          String?
+  caption      String?
+  uploadedBy   String
+  uploadedAt   DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  // Relations
+  uploader     User     @relation("MediaUploader", fields: [uploadedBy], references: [id])
+  
+  @@index([mimeType])
+  @@index([uploadedAt])
 }

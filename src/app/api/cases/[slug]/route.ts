@@ -3,6 +3,29 @@ import { PrismaClient } from '@/generated/prisma';
 
 const prisma = new PrismaClient();
 
+// 为静态导出生成参数
+export async function generateStaticParams() {
+  try {
+    const cases = await prisma.case.findMany({
+      where: {
+        publishedAt: {
+          lte: new Date()
+        }
+      },
+      select: {
+        slug: true
+      }
+    });
+    
+    return cases.map((caseItem) => ({
+      slug: caseItem.slug
+    }));
+  } catch (error) {
+    console.error('Error generating static params for cases:', error);
+    return [];
+  }
+}
+
 // GET /api/cases/[slug] - 获取案例详情（前台）
 export async function GET(
   request: NextRequest,

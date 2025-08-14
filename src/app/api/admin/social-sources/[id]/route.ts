@@ -9,6 +9,11 @@ interface RouteParams {
   };
 }
 
+// 为静态导出生成参数 - 管理API不需要静态生成
+export async function generateStaticParams() {
+  return [];
+}
+
 // GET /api/admin/social-sources/[id] - 获取单个社交媒体源详情
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {

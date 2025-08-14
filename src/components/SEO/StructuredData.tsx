@@ -1,16 +1,17 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useLocale } from 'next-intl';
 
 interface StructuredDataProps {
   type?: 'organization' | 'website' | 'article' | 'service';
   data?: any;
+  locale?: string;
 }
 
-export default function StructuredData({ type = 'organization', data }: StructuredDataProps) {
+export default function StructuredData({ type = 'organization', data, locale }: StructuredDataProps) {
   const pathname = usePathname();
-  const locale = useLocale();
+  // 从路径中提取语言信息，或使用默认值
+  const currentLocale = locale || extractLocaleFromPath(pathname) || 'en';
   const baseUrl = 'https://spaceplusworldwide.club';
   const currentUrl = `${baseUrl}${pathname}`;
 
@@ -18,7 +19,7 @@ export default function StructuredData({ type = 'organization', data }: Structur
     const baseData = {
       '@context': 'https://schema.org',
       '@type': getSchemaType(type),
-      ...getSchemaData(type, currentUrl, locale, data)
+      ...getSchemaData(type, currentUrl, currentLocale, data)
     };
 
     return JSON.stringify(baseData, null, 2);
@@ -30,6 +31,16 @@ export default function StructuredData({ type = 'organization', data }: Structur
       dangerouslySetInnerHTML={{ __html: getStructuredData() }}
     />
   );
+}
+
+// 从路径中提取语言代码
+function extractLocaleFromPath(pathname: string): string | null {
+  const segments = pathname.split('/');
+  const firstSegment = segments[1];
+  
+  // 检查是否是有效的语言代码
+  const validLocales = ['en', 'zh-CN', 'th'];
+  return validLocales.includes(firstSegment) ? firstSegment : null;
 }
 
 function getSchemaType(type: string): string {
