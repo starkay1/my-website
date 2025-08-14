@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Inter, Noto_Sans_SC } from 'next/font/google';
 import './globals.css';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import GoogleOptimize from '@/components/analytics/GoogleOptimize';
+import PerformanceMonitor from '@/components/analytics/PerformanceMonitor';
+import { OrganizationSchema, WebsiteSchema } from '@/components/SEO/StructuredData';
 
 // 导入应用初始化模块（仅在服务器端执行）
 if (typeof window === 'undefined') {
@@ -104,6 +107,12 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
+        {process.env.NEXT_PUBLIC_OPTIMIZE_ID && (
+          <GoogleOptimize optimizeId={process.env.NEXT_PUBLIC_OPTIMIZE_ID} />
+        )}
+        <PerformanceMonitor />
+        <OrganizationSchema />
+        <WebsiteSchema />
         {/* Meta Pixel */}
         <script
           dangerouslySetInnerHTML={{

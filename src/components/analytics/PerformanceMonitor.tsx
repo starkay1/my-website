@@ -19,7 +19,15 @@ export default function PerformanceMonitor({
   onMetric, 
   enableConsoleLog = false 
 }: PerformanceMonitorProps) {
+  const isEnabled = process.env.NEXT_PUBLIC_ENABLE_PERFORMANCE_MONITORING === 'true';
+  const sampleRate = parseFloat(process.env.NEXT_PUBLIC_PERFORMANCE_SAMPLE_RATE || '0.1');
+  
   useEffect(() => {
+    // 检查是否启用性能监控
+    if (!isEnabled) return;
+    
+    // 采样率控制
+    if (Math.random() > sampleRate) return;
     // 检查浏览器支持
     if (typeof window === 'undefined' || !('performance' in window)) {
       return;
@@ -206,7 +214,7 @@ export default function PerformanceMonitor({
     return () => {
       // PerformanceObserver 会在组件卸载时自动断开连接
     };
-  }, [onMetric, enableConsoleLog]);
+  }, [onMetric, enableConsoleLog, isEnabled, sampleRate]);
 
   return null; // 这是一个无UI的监控组件
 }
