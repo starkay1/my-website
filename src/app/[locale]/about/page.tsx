@@ -14,6 +14,14 @@ const Timeline = dynamic(() => import('@/components/about').then(mod => ({ defau
 const Leadership = dynamic(() => import('@/components/about').then(mod => ({ default: mod.Leadership })), { ssr: false });
 const OfficeTour = dynamic(() => import('@/components/about').then(mod => ({ default: mod.OfficeTour })), { ssr: false });
 
+// 生成静态参数以支持静态导出
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'zh' },
+  ];
+}
+
 // 页面属性接口
 interface AboutPageProps {
   params: {

@@ -10,6 +10,14 @@ const PricingSection = dynamic(() => import('@/components/services/PricingSectio
 const TestimonialsSection = dynamic(() => import('@/components/services/TestimonialsSection'), { ssr: false });
 const ContactCTA = dynamic(() => import('@/components/services/ContactCTA'), { ssr: false });
 
+// 生成静态参数以支持静态导出
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'zh' },
+  ];
+}
+
 export const metadata: Metadata = {
   title: '专业服务 | Spaceplus Worldwide',
   description: '从项目托管到品牌孵化，我们提供全方位的夜生活娱乐空间解决方案',

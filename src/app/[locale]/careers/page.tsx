@@ -10,6 +10,14 @@ const CompanyCulture = dynamic(() => import('@/components/careers/CompanyCulture
 const Benefits = dynamic(() => import('@/components/careers/Benefits'), { ssr: false });
 const ApplicationProcess = dynamic(() => import('@/components/careers/ApplicationProcess'), { ssr: false });
 
+// 生成静态参数以支持静态导出
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'zh' },
+  ];
+}
+
 // 生成页面元数据
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   // 在静态构建时使用固定语言环境

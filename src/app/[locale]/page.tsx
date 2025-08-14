@@ -1,6 +1,14 @@
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 
+// 生成静态参数以支持静态导出
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'zh' },
+  ];
+}
+
 // 动态导入所有组件以避免 SSR 问题
 const HeroSection = dynamic(() => import('@/components/home/HeroSection'), { ssr: false });
 const TrustSection = dynamic(() => import('@/components/home/TrustSection'), { ssr: false });

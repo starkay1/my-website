@@ -11,6 +11,14 @@ const ContactMap = dynamic(() => import('@/components/contact/ContactMap'), { ss
 const ContactFAQ = dynamic(() => import('@/components/contact/ContactFAQ'), { ssr: false });
 const ContactCTA = dynamic(() => import('@/components/contact/ContactCTA'), { ssr: false });
 
+// 生成静态参数以支持静态导出
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'zh' },
+  ];
+}
+
 interface ContactPageProps {
   params: {
     locale: string;

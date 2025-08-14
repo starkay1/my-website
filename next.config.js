@@ -7,11 +7,10 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 完全禁用静态导出
-  // output: 'export',
-  // output: undefined,
-  trailingSlash: false,
-  distDir: '.next',
+  // GitHub Pages 静态导出配置
+  output: process.env.GITHUB_PAGES === 'true' ? 'export' : undefined,
+  trailingSlash: process.env.GITHUB_PAGES === 'true',
+  distDir: process.env.GITHUB_PAGES === 'true' ? 'out' : '.next',
   
   // 处理缺失的翻译消息
   experimental: {

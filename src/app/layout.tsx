@@ -3,8 +3,10 @@ import { Inter, Noto_Sans_SC } from 'next/font/google';
 import './globals.css';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import GoogleOptimize from '@/components/analytics/GoogleOptimize';
+import UserBehaviorTracker from '@/components/analytics/UserBehaviorTracker';
 import { PerformanceMonitor } from '@/components/ui/PerformanceOptimizer';
 import { OrganizationSchema, WebsiteSchema } from '@/components/SEO/StructuredData';
+import '@/lib/sentry';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -108,6 +110,11 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_OPTIMIZE_ID && (
           <GoogleOptimize optimizeId={process.env.NEXT_PUBLIC_OPTIMIZE_ID} />
         )}
+        <UserBehaviorTracker
+          enableHeatmap={process.env.NODE_ENV === 'production'}
+          enableScrollTracking={true}
+          enableClickTracking={true}
+        />
       </body>
     </html>
   );

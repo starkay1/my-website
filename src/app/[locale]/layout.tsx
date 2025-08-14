@@ -6,10 +6,13 @@ import Footer from '@/components/layout/Footer';
 
 const locales = ['zh-CN', 'en', 'th'];
 
-// 暂时禁用静态参数生成以避免SSR问题
-// export function generateStaticParams() {
-//   return locales.map((locale) => ({ locale }));
-// }
+// 生成静态参数以支持静态导出
+export function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'zh' },
+  ];
+}
 
 export default async function LocaleLayout({
   children,
