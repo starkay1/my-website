@@ -7,8 +7,8 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages 静态导出配置
-  output: 'export',
+  // GitHub Pages 静态导出配置（仅在生产环境启用）
+  ...(process.env.NODE_ENV === 'production' && { output: 'export' }),
   trailingSlash: true,
   
   // 图片配置（GitHub Pages 需要 unoptimized）
