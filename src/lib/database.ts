@@ -452,5 +452,7 @@ class DatabaseService {
 
 export const db = new DatabaseService();
 
-// Initialize seed data
-db.seedInitialData().catch(console.error);
+// Initialize seed data (skip in static build)
+if (process.env.GITHUB_PAGES !== 'true') {
+  db.seedInitialData().catch(console.error);
+}

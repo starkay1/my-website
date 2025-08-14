@@ -276,6 +276,11 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
 // 生成静态路径
 export async function generateStaticParams() {
+  // 在静态构建时返回空数组，避免API调用
+  if (process.env.GITHUB_PAGES === 'true') {
+    return [];
+  }
+  
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'}/api/news`);
     if (!response.ok) {

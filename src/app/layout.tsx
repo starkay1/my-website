@@ -3,13 +3,8 @@ import { Inter, Noto_Sans_SC } from 'next/font/google';
 import './globals.css';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import GoogleOptimize from '@/components/analytics/GoogleOptimize';
-import PerformanceMonitor from '@/components/analytics/PerformanceMonitor';
+import { PerformanceMonitor } from '@/components/ui/PerformanceOptimizer';
 import { OrganizationSchema, WebsiteSchema } from '@/components/SEO/StructuredData';
-
-// 导入应用初始化模块（仅在服务器端执行）
-if (typeof window === 'undefined') {
-  import('@/lib/app-init');
-}
 
 const inter = Inter({
   subsets: ['latin'],
@@ -100,44 +95,19 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#7A3EFF" />
         <meta name="msapplication-TileColor" content="#7A3EFF" />
+        <OrganizationSchema />
+        <WebsiteSchema />
       </head>
-      <body className="antialiased bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white">
-        {children}
-        {/* Google Analytics */}
+      <body className="antialiased bg-white text-neutral-900">
+        <PerformanceMonitor>
+          {children}
+        </PerformanceMonitor>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
         {process.env.NEXT_PUBLIC_OPTIMIZE_ID && (
           <GoogleOptimize optimizeId={process.env.NEXT_PUBLIC_OPTIMIZE_ID} />
         )}
-        <PerformanceMonitor />
-        <OrganizationSchema />
-        <WebsiteSchema />
-        {/* Meta Pixel */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', 'XXXXXXXXXXXXXXX');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"
-          />
-        </noscript>
       </body>
     </html>
   );

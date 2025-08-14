@@ -55,10 +55,29 @@ interface CardTitleProps extends ComponentProps {
 
 // 样式配置
 const cardVariants: Record<CardVariant, string> = {
-  default: 'bg-white border border-neutral-200',
-  outlined: 'bg-white border-2 border-neutral-300',
-  elevated: 'bg-white shadow-lg border-0',
-  filled: 'bg-neutral-50 border border-neutral-200',
+  default: cn(
+    'bg-white/95 backdrop-blur-sm border border-neutral-200/60',
+    'shadow-sm hover:shadow-lg transition-all duration-300',
+    'hover:border-neutral-300/80 hover:-translate-y-1'
+  ),
+  outlined: cn(
+    'bg-white/90 backdrop-blur-sm border-2 border-neutral-300/70',
+    'hover:border-primary-400/60 hover:bg-white',
+    'transition-all duration-300 hover:-translate-y-0.5',
+    'hover:shadow-md'
+  ),
+  elevated: cn(
+    'bg-white/95 backdrop-blur-sm border-0',
+    'shadow-lg hover:shadow-2xl transition-all duration-300',
+    'hover:-translate-y-2 hover:shadow-primary-500/10'
+  ),
+  filled: cn(
+    'bg-gradient-to-br from-neutral-50/90 to-neutral-100/90',
+    'backdrop-blur-sm border border-neutral-200/60',
+    'hover:from-neutral-100/90 hover:to-neutral-150/90',
+    'transition-all duration-300 hover:-translate-y-0.5',
+    'hover:shadow-md'
+  ),
 };
 
 const cardSizes: Record<CardSize, string> = {
@@ -99,7 +118,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
     const cardClasses = cn(
       // 基础样式
-      'relative overflow-hidden transition-all duration-200',
+      'relative overflow-hidden transition-all duration-300 ease-out',
+      'will-change-transform group',
       // 变体
       cardVariants[variant],
       // 尺寸

@@ -29,34 +29,49 @@ interface ButtonProps extends ComponentProps {
 // 按钮样式配置
 const buttonVariants: Record<ButtonVariant, string> = {
   primary: cn(
-    'bg-primary-500 hover:bg-primary-600 active:bg-primary-700',
+    'bg-gradient-to-r from-primary-500 to-primary-600',
+    'hover:from-primary-600 hover:to-primary-700',
+    'active:from-primary-700 active:to-primary-800',
     'text-white border-transparent',
     'shadow-lg hover:shadow-xl active:shadow-md',
-    'focus:ring-primary-400'
+    'focus:ring-primary-400/50 focus:ring-4',
+    'relative overflow-hidden',
+    'before:absolute before:inset-0 before:bg-white/10 before:opacity-0',
+    'hover:before:opacity-100 before:transition-opacity before:duration-300'
   ),
   secondary: cn(
-    'bg-secondary-500 hover:bg-secondary-600 active:bg-secondary-700',
+    'bg-gradient-to-r from-secondary-500 to-secondary-600',
+    'hover:from-secondary-600 hover:to-secondary-700',
+    'active:from-secondary-700 active:to-secondary-800',
     'text-white border-transparent',
     'shadow-lg hover:shadow-xl active:shadow-md',
-    'focus:ring-secondary-400'
+    'focus:ring-secondary-400/50 focus:ring-4',
+    'relative overflow-hidden',
+    'before:absolute before:inset-0 before:bg-white/10 before:opacity-0',
+    'hover:before:opacity-100 before:transition-opacity before:duration-300'
   ),
   outline: cn(
-    'bg-transparent hover:bg-neutral-50 active:bg-neutral-100',
+    'bg-white/80 backdrop-blur-sm hover:bg-white',
+    'active:bg-neutral-50',
     'text-neutral-700 hover:text-neutral-900',
-    'border-neutral-300 hover:border-neutral-400',
-    'focus:ring-neutral-400'
+    'border-2 border-neutral-200 hover:border-neutral-300',
+    'focus:ring-neutral-400/50 focus:ring-4',
+    'shadow-sm hover:shadow-md active:shadow-sm'
   ),
   ghost: cn(
-    'bg-transparent hover:bg-neutral-100 active:bg-neutral-200',
+    'bg-transparent hover:bg-neutral-100/80 active:bg-neutral-200/80',
     'text-neutral-700 hover:text-neutral-900',
-    'border-transparent',
-    'focus:ring-neutral-400'
+    'border-transparent backdrop-blur-sm',
+    'focus:ring-neutral-400/50 focus:ring-4'
   ),
   link: cn(
     'bg-transparent hover:bg-transparent',
     'text-primary-600 hover:text-primary-700 active:text-primary-800',
     'border-transparent underline-offset-4 hover:underline',
-    'focus:ring-primary-400 shadow-none'
+    'focus:ring-primary-400/50 focus:ring-4 shadow-none',
+    'relative after:absolute after:bottom-0 after:left-0 after:w-0',
+    'after:h-0.5 after:bg-current after:transition-all after:duration-300',
+    'hover:after:w-full'
   ),
 };
 
@@ -93,10 +108,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseClasses = cn(
       // 基础样式
       'inline-flex items-center justify-center gap-2',
-      'font-medium rounded-lg border transition-all duration-200',
+      'font-medium rounded-xl border transition-all duration-300',
       'focus:outline-none focus:ring-2 focus:ring-offset-2',
       'disabled:opacity-50 disabled:cursor-not-allowed',
-      'transform hover:scale-105 active:scale-95',
+      'disabled:hover:scale-100 disabled:hover:shadow-none',
+      'transform hover:scale-[1.02] active:scale-[0.98]',
+      'hover:-translate-y-0.5 active:translate-y-0',
+      'will-change-transform',
       // 尺寸
       buttonSizes[size],
       // 变体

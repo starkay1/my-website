@@ -7,9 +7,11 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages 静态导出配置（仅在生产环境启用）
-  // 注意：API路由在静态导出模式下不支持，所以暂时禁用
-  // ...(process.env.NODE_ENV === 'production' && { output: 'export' }),
+  // GitHub Pages 静态导出配置（仅在GitHub Pages部署时启用）
+  ...(process.env.GITHUB_PAGES && { 
+    output: 'export',
+    distDir: 'out'
+  }),
   trailingSlash: true,
   
   // 图片配置（GitHub Pages 需要 unoptimized）
@@ -26,7 +28,7 @@ const nextConfig = {
   generateEtags: false,
   
   // 自定义域名配置
-  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://spaceplusworldwide.club' : '',
+  assetPrefix: process.env.GITHUB_PAGES ? '' : (process.env.NODE_ENV === 'production' ? 'https://spaceplusworldwide.club' : ''),
   basePath: process.env.NODE_ENV === 'production' ? '' : '',
   
   // 环境变量

@@ -9,7 +9,9 @@ import type { PageProps } from '@/types';
 
 // 生成页面元数据
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const t = await getTranslations('careers');
+  // 在静态构建时使用固定语言环境
+  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : params.locale;
+  const t = await getTranslations({ locale: staticLocale, namespace: 'careers' });
   
   return {
     title: t('meta.title'),
@@ -32,7 +34,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // 职位页面组件
 export default async function CareersPage({ params, searchParams }: PageProps) {
-  const t = await getTranslations('careers');
+  // 在静态构建时使用固定语言环境
+  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : params.locale;
+  const t = await getTranslations({ locale: staticLocale, namespace: 'careers' });
+  
+  // 在静态构建时避免使用searchParams
+  const staticSearchParams = process.env.GITHUB_PAGES === 'true' ? {} : searchParams;
   
   return (
     <main className="min-h-screen">
@@ -40,7 +47,7 @@ export default async function CareersPage({ params, searchParams }: PageProps) {
       <CareersHero />
       
       {/* 职位列表 */}
-      <JobsList searchParams={searchParams} />
+      <JobsList searchParams={staticSearchParams} />
       
       {/* 公司文化 */}
       <CompanyCulture />

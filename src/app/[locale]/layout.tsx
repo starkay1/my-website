@@ -24,7 +24,9 @@ export default async function LocaleLayout({
 
   // Providing all messages to the client
   // side is the easiest way to get started
-  const messages = await getMessages();
+  // 在静态构建时使用固定语言环境
+  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : locale;
+  const messages = await getMessages({ locale: staticLocale });
 
   return (
     <NextIntlClientProvider messages={messages}>

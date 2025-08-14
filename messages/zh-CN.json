@@ -90,6 +90,17 @@
         "授权体系建立",
         "品牌管控机制"
       ]
+    },
+    "testimonials": {
+      "title": "客户见证",
+      "subtitle": "来自合作伙伴的真实反馈"
+    },
+    "contact": {
+      "title": "联系我们",
+      "subtitle": "获取专业服务方案",
+      "cta": "立即咨询",
+      "urgent_cta": "紧急咨询",
+      "normal_cta": "常规咨询"
     }
   },
   "cases": {

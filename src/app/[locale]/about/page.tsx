@@ -29,7 +29,9 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
     notFound();
   }
 
-  const t = await getTranslations({ locale, namespace: 'about' });
+  // 在静态构建时使用固定语言环境
+  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : locale;
+  const t = await getTranslations({ locale: staticLocale, namespace: 'about' });
 
   return {
     title: t('meta.title'),

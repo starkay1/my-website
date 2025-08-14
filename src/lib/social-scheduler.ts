@@ -288,8 +288,8 @@ export class SocialScheduler {
 
 export const socialScheduler = SocialScheduler.getInstance();
 
-// 在应用启动时自动启动调度器
-if (process.env.NODE_ENV !== 'test') {
+// 在应用启动时自动启动调度器（非测试环境且非静态构建）
+if (process.env.NODE_ENV !== 'test' && process.env.GITHUB_PAGES !== 'true') {
   // 延迟启动，确保数据库连接已建立
   setTimeout(() => {
     socialScheduler.start().catch(console.error);

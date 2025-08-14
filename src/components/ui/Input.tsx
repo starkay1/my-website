@@ -38,16 +38,23 @@ interface TextareaProps extends BaseInputProps, Omit<React.TextareaHTMLAttribute
 // 样式配置
 const inputVariants: Record<InputVariant, string> = {
   default: cn(
-    'border border-neutral-300 bg-white',
-    'focus:border-primary-500 focus:ring-primary-500'
+    'border-neutral-300/70 bg-white/90 backdrop-blur-sm',
+    'hover:border-neutral-400/80 hover:bg-white',
+    'focus:border-primary-500 focus:ring-primary-500/30 focus:ring-4',
+    'focus:bg-white transition-all duration-300'
   ),
   filled: cn(
-    'border-0 bg-neutral-100',
-    'focus:bg-white focus:ring-primary-500'
+    'border-transparent bg-neutral-100/80 backdrop-blur-sm',
+    'hover:bg-neutral-150/80',
+    'focus:bg-white focus:border-primary-500/70',
+    'focus:ring-primary-500/30 focus:ring-4',
+    'transition-all duration-300'
   ),
   outline: cn(
-    'border-2 border-neutral-200 bg-transparent',
-    'focus:border-primary-500 focus:ring-0'
+    'border-2 border-neutral-300/70 bg-white/50 backdrop-blur-sm',
+    'hover:border-neutral-400/80 hover:bg-white/80',
+    'focus:border-primary-500 focus:ring-primary-500/30 focus:ring-4',
+    'focus:bg-white transition-all duration-300'
   ),
 };
 
@@ -59,9 +66,20 @@ const inputSizes: Record<InputSize, string> = {
 
 const inputStates: Record<InputState, string> = {
   default: '',
-  error: 'border-red-500 focus:border-red-500 focus:ring-red-500',
-  success: 'border-green-500 focus:border-green-500 focus:ring-green-500',
-  warning: 'border-yellow-500 focus:border-yellow-500 focus:ring-yellow-500',
+  error: cn(
+    'border-red-400/70 focus:border-red-500 focus:ring-red-500/30',
+    'text-red-900 placeholder-red-400',
+    'bg-red-50/50 hover:bg-red-50/80 focus:bg-white',
+    'animate-pulse'
+  ),
+  success: cn(
+    'border-green-400/70 focus:border-green-500 focus:ring-green-500/30',
+    'text-green-900 bg-green-50/50 hover:bg-green-50/80 focus:bg-white'
+  ),
+  warning: cn(
+    'border-yellow-400/70 focus:border-yellow-500 focus:ring-yellow-500/30',
+    'text-yellow-900 bg-yellow-50/50 hover:bg-yellow-50/80 focus:bg-white'
+  ),
 };
 
 const stateIcons: Record<Exclude<InputState, 'default'>, React.ReactNode> = {
@@ -108,11 +126,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     
     const inputClasses = cn(
       // 基础样式
-      'w-full rounded-lg transition-all duration-200',
-      'placeholder:text-neutral-400',
+      'w-full rounded-xl transition-all duration-300 ease-out',
+      'placeholder:text-neutral-400/70 font-medium',
       'focus:outline-none focus:ring-2 focus:ring-offset-0',
       'disabled:opacity-50 disabled:cursor-not-allowed',
+      'disabled:hover:border-neutral-300/70',
       'read-only:bg-neutral-50 read-only:cursor-default',
+      'will-change-auto',
       // 变体
       inputVariants[variant],
       // 尺寸
@@ -245,11 +265,13 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const textareaClasses = cn(
       // 基础样式
-      'w-full rounded-lg transition-all duration-200',
-      'placeholder:text-neutral-400',
+      'w-full rounded-xl transition-all duration-300 ease-out',
+      'placeholder:text-neutral-400/70 font-medium',
       'focus:outline-none focus:ring-2 focus:ring-offset-0',
       'disabled:opacity-50 disabled:cursor-not-allowed',
+      'disabled:hover:border-neutral-300/70',
       'read-only:bg-neutral-50 read-only:cursor-default',
+      'will-change-auto',
       // 变体
       inputVariants[variant],
       // 尺寸

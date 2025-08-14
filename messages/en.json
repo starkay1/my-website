@@ -90,6 +90,17 @@
         "Licensing System Establishment",
         "Brand Control Mechanisms"
       ]
+    },
+    "testimonials": {
+      "title": "Client Testimonials",
+      "subtitle": "Real feedback from our partners"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "Get professional service solutions",
+      "cta": "Get Consultation",
+      "urgent_cta": "Urgent Consultation",
+      "normal_cta": "Regular Consultation"
     }
   },
   "cases": {

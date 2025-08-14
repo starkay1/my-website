@@ -39,3 +39,12 @@ export default function HomePage() {
     </div>
   );
 }
+
+// 为静态导出生成参数
+export async function generateStaticParams() {
+  return [
+    { locale: 'zh-CN' },
+    { locale: 'en' },
+    { locale: 'th' }
+  ];
+}

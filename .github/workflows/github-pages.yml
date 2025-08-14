@@ -44,8 +44,8 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Build with Next.js
-        run: npm run build
+      - name: Build with Next.js (Static)
+        run: npm run build:static
         env:
           NODE_ENV: production
           NEXTAUTH_URL: https://spaceplusworldwide.club

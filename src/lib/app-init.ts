@@ -48,8 +48,8 @@ if (typeof process !== 'undefined') {
   });
 }
 
-// 自动初始化（仅在服务器端）
-if (typeof window === 'undefined') {
+// 自动初始化（仅在服务器端，且非静态构建）
+if (typeof window === 'undefined' && process.env.GITHUB_PAGES !== 'true') {
   // 延迟初始化，确保数据库连接等已准备就绪
   setTimeout(() => {
     initializeApp();

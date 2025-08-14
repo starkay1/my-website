@@ -15,7 +15,9 @@ interface ContactPageProps {
 }
 
 export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
-  const t = await getTranslations('contact');
+  // 在静态构建时使用固定语言环境
+  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : params.locale;
+  const t = await getTranslations({ locale: staticLocale, namespace: 'contact' });
   
   return {
     title: '联系我们 - SpacePlus',

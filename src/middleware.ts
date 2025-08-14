@@ -50,7 +50,7 @@ const intlMiddleware = createMiddleware({
   locales: ['zh-CN', 'en', 'th'],
   defaultLocale: 'zh-CN',
   localePrefix: 'as-needed',
-  localeDetection: true
+  localeDetection: process.env.GITHUB_PAGES !== 'true'
 });
 
 const secret = new TextEncoder().encode(process.env.AUTH_SECRET || 'dev-secret-change-me');
