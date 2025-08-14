@@ -1,0 +1,137 @@
+version: '3.8'
+
+services:
+  # 应用服务
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://spaceplus:password@postgres:5432/spaceplus
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - NEXT_PUBLIC_BASE_URL=http://localhost:3000
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+    networks:
+      - spaceplus-network
+
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=spaceplus
+      - POSTGRES_USER=spaceplus
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    networks:
+      - spaceplus-network
+
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - spaceplus-network
+    command: redis-server --appendonly yes
+
+  # Nginx 反向代理
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./uploads:/var/www/uploads
+    depends_on:
+      - app
+    restart: unless-stopped
+    networks:
+      - spaceplus-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  spaceplus-network:
+    driver: bridge
+
+---
+# 开发环境配置
+version: '3.8'
+
+services:
+  # 开发环境应用服务
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://spaceplus:password@postgres-dev:5432/spaceplus_dev
+      - JWT_SECRET=dev-secret-key
+      - NEXT_PUBLIC_BASE_URL=http://localhost:3000
+    depends_on:
+      - postgres-dev
+      - redis-dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    restart: unless-stopped
+    networks:
+      - spaceplus-dev-network
+
+  # 开发环境 PostgreSQL
+  postgres-dev:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=spaceplus_dev
+      - POSTGRES_USER=spaceplus
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - spaceplus-dev-network
+
+  # 开发环境 Redis
+  redis-dev:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_dev_data:/data
+    restart: unless-stopped
+    networks:
+      - spaceplus-dev-network
+
+volumes:
+  postgres_dev_data:
+  redis_dev_data:
+
+networks:
+  spaceplus-dev-network:
+    driver: bridge

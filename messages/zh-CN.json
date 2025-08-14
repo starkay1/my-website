@@ -1,0 +1,223 @@
+{
+  "navigation": {
+    "home": "首页",
+    "services": "服务与业务",
+    "management": "夜店项目托管",
+    "consulting": "战略顾问服务",
+    "brand": "品牌孵化与授权",
+    "cases": "案例与成果",
+    "about": "关于我们",
+    "news": "新闻与洞察",
+    "careers": "加入我们",
+    "contact": "联系我们"
+  },
+  "home": {
+    "hero": {
+      "slogan": "全球夜生活品牌管理与孵化平台",
+      "subtitle": "提供夜店项目托管、品牌顾问、品牌孵化与授权服务，帮助项目高效起盘与稳定增长",
+      "cta_primary": "获取方案",
+      "cta_secondary": "WhatsApp联系"
+    },
+    "services": {
+      "title": "核心服务",
+      "management": {
+        "title": "托管",
+        "description": "专业团队驻店管理，全面提升运营效率"
+      },
+      "consulting": {
+        "title": "顾问",
+        "description": "战略诊断与方案设计，助力品牌升级"
+      },
+      "brand": {
+        "title": "孵化",
+        "description": "从0到1品牌孵化，授权合规管理"
+      }
+    },
+    "methodology": {
+      "title": "服务方法论",
+      "steps": {
+        "diagnose": "诊断",
+        "design": "设计",
+        "implement": "落地",
+        "training": "培训",
+        "review": "复盘"
+      }
+    },
+    "cases": {
+      "title": "精选案例",
+      "subtitle": "真实案例见证专业实力",
+      "view_more": "查看更多案例"
+    },
+    "lead_form": {
+      "title": "获取专属方案",
+      "name": "姓名",
+      "country": "国家/地区",
+      "contact": "联系方式",
+      "project_stage": "项目阶段",
+      "privacy_consent": "我同意隐私政策",
+      "submit": "提交咨询"
+    }
+  },
+  "services": {
+    "title": "服务与业务",
+    "subtitle": "专业的夜生活品牌管理解决方案",
+    "management": {
+      "title": "夜店项目托管",
+      "description": "专业团队驻店管理，全面负责日常运营",
+      "features": [
+        "驻店管理团队",
+        "运营数据分析",
+        "SOP标准化流程",
+        "定期汇报机制"
+      ]
+    },
+    "consulting": {
+      "title": "战略顾问服务",
+      "description": "深度诊断分析，提供专业战略建议",
+      "features": [
+        "品牌诊断分析",
+        "市场竞争分析",
+        "运营策略设计",
+        "培训体系搭建"
+      ]
+    },
+    "brand": {
+      "title": "品牌孵化与授权",
+      "description": "从品牌创建到授权管理的全链条服务",
+      "features": [
+        "品牌命名设计",
+        "视觉系统搭建",
+        "授权体系建立",
+        "品牌管控机制"
+      ]
+    }
+  },
+  "cases": {
+    "title": "案例与成果",
+    "subtitle": "真实案例见证专业实力",
+    "filters": {
+      "all": "全部",
+      "country": "国家",
+      "city": "城市",
+      "type": "类型",
+      "kpi": "关键指标"
+    }
+  },
+  "about": {
+    "title": "关于我们",
+    "subtitle": "专业的夜生活品牌管理团队",
+    "team": {
+      "title": "核心团队"
+    },
+    "timeline": {
+      "title": "发展历程"
+    },
+    "mediakit": {
+      "title": "媒体资料包",
+      "logo": "品牌标识",
+      "kv": "主视觉",
+      "brand_guide": "品牌指南"
+    }
+  },
+  "news": {
+    "title": "新闻与洞察",
+    "subtitle": "行业动态与专业见解",
+    "categories": {
+      "news": "新闻",
+      "insights": "洞察",
+      "methodology": "方法论",
+      "events": "活动"
+    }
+  },
+  "careers": {
+    "title": "加入我们",
+    "subtitle": "与优秀的人一起成长",
+    "flying_consultant": {
+      "title": "飞行顾问计划",
+      "description": "灵活的合作模式，共享行业机遇"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "开启合作之旅",
+    "form": {
+      "name": "姓名",
+      "phone": "电话",
+      "email": "邮箱",
+      "message": "留言",
+      "privacy_consent": "我同意隐私政策",
+      "submit": "发送消息"
+    },
+    "quick_links": {
+      "wechat": "微信联系",
+      "whatsapp": "WhatsApp",
+      "email": "邮件联系"
+    }
+  },
+  "search": {
+    "title": "搜索",
+    "placeholder": "搜索内容...",
+    "no_results": "未找到相关结果",
+    "results_count": "找到 {count} 个结果",
+    "recent_searches": "最近搜索",
+    "popular_searches": "热门搜索",
+    "clear_history": "清除历史",
+    "filters": {
+      "title": "筛选",
+      "category": "分类",
+      "date": "日期",
+      "sort_by": "排序方式",
+      "relevance": "相关性",
+      "newest": "最新",
+      "oldest": "最早",
+      "apply": "应用筛选",
+      "clear": "清除筛选"
+    }
+  },
+  "animations": {
+    "loading": "加载中...",
+    "error": "动画加载失败",
+    "retry": "重试",
+    "skip": "跳过动画"
+  },
+  "performance": {
+    "slow_connection": "检测到网络较慢",
+    "optimizing": "正在为您的设备优化...",
+    "reduced_motion": "已启用减少动画"
+  },
+  "accessibility": {
+    "skip_to_content": "跳转到主要内容",
+    "close": "关闭",
+    "open_menu": "打开菜单",
+    "close_menu": "关闭菜单",
+    "expand": "展开",
+    "collapse": "收起",
+    "previous_image": "上一张图片",
+    "next_image": "下一张图片",
+    "play_video": "播放视频",
+    "pause_video": "暂停视频"
+  },
+  "common": {
+    "learn_more": "了解更多",
+    "view_all": "查看全部",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "success": "成功",
+    "required": "必填",
+    "optional": "选填",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "删除",
+    "edit": "编辑",
+    "share": "分享",
+    "copy": "复制",
+    "download": "下载",
+    "upload": "上传",
+    "refresh": "刷新",
+    "retry": "重试"
+  }
+}

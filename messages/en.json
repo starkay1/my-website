@@ -1,0 +1,223 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "management": "Club Management",
+    "consulting": "Strategic Consulting",
+    "brand": "Brand Incubation",
+    "cases": "Cases & Results",
+    "about": "About Us",
+    "news": "News & Insights",
+    "careers": "Careers",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "slogan": "Global Nightlife Brand Management & Incubation Platform",
+      "subtitle": "Providing club management, strategic consulting, and brand incubation services to help projects launch efficiently and grow sustainably",
+      "cta_primary": "Get Solution",
+      "cta_secondary": "WhatsApp Contact"
+    },
+    "services": {
+      "title": "Core Services",
+      "management": {
+        "title": "Management",
+        "description": "Professional on-site team management for enhanced operational efficiency"
+      },
+      "consulting": {
+        "title": "Consulting",
+        "description": "Strategic diagnosis and solution design for brand upgrades"
+      },
+      "brand": {
+        "title": "Incubation",
+        "description": "0-to-1 brand incubation with licensing compliance management"
+      }
+    },
+    "methodology": {
+      "title": "Service Methodology",
+      "steps": {
+        "diagnose": "Diagnose",
+        "design": "Design",
+        "implement": "Implement",
+        "training": "Training",
+        "review": "Review"
+      }
+    },
+    "cases": {
+      "title": "Featured Cases",
+      "subtitle": "Real cases demonstrate professional expertise",
+      "view_more": "View More Cases"
+    },
+    "lead_form": {
+      "title": "Get Custom Solution",
+      "name": "Name",
+      "country": "Country/Region",
+      "contact": "Contact",
+      "project_stage": "Project Stage",
+      "privacy_consent": "I agree to the privacy policy",
+      "submit": "Submit Inquiry"
+    }
+  },
+  "services": {
+    "title": "Services & Business",
+    "subtitle": "Professional nightlife brand management solutions",
+    "management": {
+      "title": "Club Project Management",
+      "description": "Professional on-site management team for comprehensive daily operations",
+      "features": [
+        "On-site Management Team",
+        "Operational Data Analysis",
+        "SOP Standardization",
+        "Regular Reporting System"
+      ]
+    },
+    "consulting": {
+      "title": "Strategic Consulting Services",
+      "description": "In-depth diagnostic analysis with professional strategic recommendations",
+      "features": [
+        "Brand Diagnostic Analysis",
+        "Market Competition Analysis",
+        "Operational Strategy Design",
+        "Training System Development"
+      ]
+    },
+    "brand": {
+      "title": "Brand Incubation & Licensing",
+      "description": "Full-chain services from brand creation to licensing management",
+      "features": [
+        "Brand Naming & Design",
+        "Visual System Development",
+        "Licensing System Establishment",
+        "Brand Control Mechanisms"
+      ]
+    }
+  },
+  "cases": {
+    "title": "Cases & Results",
+    "subtitle": "Real cases demonstrating professional expertise",
+    "filters": {
+      "all": "All",
+      "country": "Country",
+      "city": "City",
+      "type": "Type",
+      "kpi": "Key Metrics"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Professional nightlife brand management team",
+    "team": {
+      "title": "Core Team"
+    },
+    "timeline": {
+      "title": "Development Timeline"
+    },
+    "mediakit": {
+      "title": "Media Kit",
+      "logo": "Brand Logo",
+      "kv": "Key Visual",
+      "brand_guide": "Brand Guidelines"
+    }
+  },
+  "news": {
+    "title": "News & Insights",
+    "subtitle": "Industry trends and professional insights",
+    "categories": {
+      "news": "News",
+      "insights": "Insights",
+      "methodology": "Methodology",
+      "events": "Events"
+    }
+  },
+  "careers": {
+    "title": "Join Us",
+    "subtitle": "Grow with exceptional people",
+    "flying_consultant": {
+      "title": "Flying Consultant Program",
+      "description": "Flexible collaboration model, sharing industry opportunities"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Start your collaboration journey",
+    "form": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "message": "Message",
+      "privacy_consent": "I agree to the privacy policy",
+      "submit": "Send Message"
+    },
+    "quick_links": {
+      "wechat": "WeChat Contact",
+      "whatsapp": "WhatsApp",
+      "email": "Email Contact"
+    }
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search content...",
+    "no_results": "No results found",
+    "results_count": "{count} results found",
+    "recent_searches": "Recent Searches",
+    "popular_searches": "Popular Searches",
+    "clear_history": "Clear History",
+    "filters": {
+      "title": "Filters",
+      "category": "Category",
+      "date": "Date",
+      "sort_by": "Sort By",
+      "relevance": "Relevance",
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "apply": "Apply Filters",
+      "clear": "Clear Filters"
+    }
+  },
+  "animations": {
+    "loading": "Loading...",
+    "error": "Animation failed to load",
+    "retry": "Retry",
+    "skip": "Skip Animation"
+  },
+  "performance": {
+    "slow_connection": "Slow connection detected",
+    "optimizing": "Optimizing for your device...",
+    "reduced_motion": "Reduced motion enabled"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to main content",
+    "close": "Close",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "previous_image": "Previous image",
+    "next_image": "Next image",
+    "play_video": "Play video",
+    "pause_video": "Pause video"
+  },
+  "common": {
+    "learn_more": "Learn More",
+    "view_all": "View All",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "error": "Error occurred",
+    "success": "Success",
+    "required": "Required",
+    "optional": "Optional",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "share": "Share",
+    "copy": "Copy",
+    "download": "Download",
+    "upload": "Upload",
+    "refresh": "Refresh",
+    "retry": "Retry"
+  }
+}
