@@ -16,20 +16,24 @@ const staticRoutes = [
 
 // 生成多语言URL
 function generateLocalizedUrls(route: string) {
-  return locales.map(locale => ({
-    url: `${baseUrl}${locale === 'zh-CN' ? '' : `/${locale}`}${route}`,
-    lastModified: new Date(),
-    changeFrequency: getChangeFrequency(route),
-    priority: getPriority(route),
-    alternates: {
-      languages: Object.fromEntries(
-        locales.map(lang => [
-          lang,
-          `${baseUrl}${lang === 'zh-CN' ? '' : `/${lang}`}${route}`
-        ])
-      )
-    }
-  }));
+  return locales.map(locale => {
+    // Map locale to URL segment
+    const urlSegment = locale === 'zh-CN' ? 'zh' : locale;
+    return {
+      url: `${baseUrl}/${urlSegment}${route}`,
+      lastModified: new Date(),
+      changeFrequency: getChangeFrequency(route),
+      priority: getPriority(route),
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map(lang => {
+            const langSegment = lang === 'zh-CN' ? 'zh' : lang;
+            return [lang, `${baseUrl}/${langSegment}${route}`];
+          })
+        )
+      }
+    };
+  });
 }
 
 // 根据路由确定更新频率

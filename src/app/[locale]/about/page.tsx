@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 import type { Locale } from '@/types';
 
@@ -16,9 +16,12 @@ const OfficeTour = dynamic(() => import('@/components/about').then(mod => ({ def
 
 // 生成静态参数以支持静态导出
 export async function generateStaticParams() {
+  // Return all locales for static generation
+  // next-intl will handle the path generation based on localePrefix setting
   return [
+    { locale: 'zh-CN' },
     { locale: 'en' },
-    { locale: 'zh' },
+    { locale: 'th' }
   ];
 }
 
@@ -34,7 +37,7 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
   const { locale } = params;
   
   // 验证语言
-  if (!['zh', 'en'].includes(locale)) {
+  if (!['zh-CN', 'en', 'th'].includes(locale)) {
     notFound();
   }
 
@@ -61,8 +64,9 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
     alternates: {
       canonical: `/${locale}/about`,
       languages: {
-        'zh': '/zh/about',
+        'zh-CN': '/zh/about',
         'en': '/en/about',
+        'th': '/th/about',
       },
     },
   };
@@ -73,9 +77,12 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = params;
   
   // 验证语言
-  if (!['zh', 'en'].includes(locale)) {
+  if (!['zh-CN', 'en', 'th'].includes(locale)) {
     notFound();
   }
+
+  // Enable static rendering
+  setRequestLocale(locale);
 
   return (
     <main className="min-h-screen">

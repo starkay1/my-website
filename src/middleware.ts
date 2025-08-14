@@ -49,7 +49,7 @@ function isSuspiciousRequest(request: NextRequest): boolean {
 const intlMiddleware = createMiddleware({
   locales: ['zh-CN', 'en', 'th'],
   defaultLocale: 'zh-CN',
-  localePrefix: 'as-needed',
+  localePrefix: 'always',
   localeDetection: process.env.GITHUB_PAGES !== 'true'
 });
 

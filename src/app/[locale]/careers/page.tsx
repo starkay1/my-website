@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 import type { PageProps } from '@/types';
 
@@ -12,17 +12,18 @@ const ApplicationProcess = dynamic(() => import('@/components/careers/Applicatio
 
 // 生成静态参数以支持静态导出
 export async function generateStaticParams() {
+  // Return all locales for static generation
+  // next-intl will handle the path generation based on localePrefix setting
   return [
+    { locale: 'zh-CN' },
     { locale: 'en' },
-    { locale: 'zh' },
+    { locale: 'th' }
   ];
 }
 
 // 生成页面元数据
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // 在静态构建时使用固定语言环境
-  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : params.locale;
-  const t = await getTranslations({ locale: staticLocale, namespace: 'careers' });
+  const t = await getTranslations({ locale: params.locale, namespace: 'careers' });
   
   return {
     title: t('meta.title'),
@@ -45,11 +46,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // 职位页面组件
 export default async function CareersPage({ params, searchParams }: PageProps) {
-  // 在静态构建时使用固定语言环境
-  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : params.locale;
-  const t = await getTranslations({ locale: staticLocale, namespace: 'careers' });
+  // Enable static rendering
+  setRequestLocale(params.locale);
   
-  // 在静态构建时避免使用searchParams
+  const t = await getTranslations({ locale: params.locale, namespace: 'careers' });
+  
+  // 在静态导出模式下避免使用 searchParams
   const staticSearchParams = process.env.GITHUB_PAGES === 'true' ? {} : searchParams;
   
   return (

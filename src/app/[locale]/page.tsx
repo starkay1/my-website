@@ -1,11 +1,15 @@
 import { useTranslations } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 
 // 生成静态参数以支持静态导出
 export async function generateStaticParams() {
+  // Return all locales for static generation
+  // next-intl will handle the path generation based on localePrefix setting
   return [
+    { locale: 'zh-CN' },
     { locale: 'en' },
-    { locale: 'zh' },
+    { locale: 'th' }
   ];
 }
 
@@ -17,7 +21,10 @@ const FeaturedCases = dynamic(() => import('@/components/home/FeaturedCases'), {
 const MethodologySection = dynamic(() => import('@/components/home/MethodologySection'), { ssr: false });
 const LeadFormSection = dynamic(() => import('@/components/home/LeadFormSection'), { ssr: false });
 
-export default function HomePage() {
+export default function HomePage({ params: { locale } }: { params: { locale: string } }) {
+  // Enable static rendering
+  setRequestLocale(locale);
+  
   const t = useTranslations('home');
 
   return (

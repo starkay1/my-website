@@ -2,10 +2,14 @@ import { getRequestConfig } from 'next-intl/server';
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment
-  // In static build, use default locale to avoid headers dependency
-  const locale = process.env.GITHUB_PAGES === 'true' 
-    ? 'zh-CN' 
-    : (await requestLocale) || 'zh-CN';
+  let locale = 'zh-CN';
+  
+  try {
+    locale = (await requestLocale) || 'zh-CN';
+  } catch (error) {
+    console.warn('Failed to get request locale, using default:', error);
+    locale = 'zh-CN';
+  }
   
   let messages = {};
   try {

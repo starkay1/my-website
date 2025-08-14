@@ -338,14 +338,19 @@ export function useLanguage() {
   const getCurrentLocale = useCallback((): Locale => {
     const segments = pathname.split('/');
     const localeSegment = segments[1];
-    return ['zh-CN', 'en', 'th'].includes(localeSegment) 
-      ? localeSegment as Locale 
-      : 'zh-CN';
+    // Map URL segments to actual locales
+    if (localeSegment === 'zh') return 'zh-CN';
+    if (localeSegment === 'en') return 'en';
+    if (localeSegment === 'th') return 'th';
+    // Default to zh-CN for root path
+    return 'zh-CN';
   }, [pathname]);
 
   const switchLanguage = useCallback((locale: Locale) => {
     const segments = pathname.split('/');
-    segments[1] = locale;
+    // Map locale to URL segment
+    const urlSegment = locale === 'zh-CN' ? 'zh' : locale;
+    segments[1] = urlSegment;
     const newPath = segments.join('/');
     router.push(newPath);
   }, [pathname, router]);

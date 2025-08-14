@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import dynamic from 'next/dynamic';
 
 // 动态导入所有组件以避免 SSR 问题
@@ -13,9 +13,12 @@ const ContactCTA = dynamic(() => import('@/components/contact/ContactCTA'), { ss
 
 // 生成静态参数以支持静态导出
 export async function generateStaticParams() {
+  // Return all locales for static generation
+  // next-intl will handle the path generation based on localePrefix setting
   return [
+    { locale: 'zh-CN' },
     { locale: 'en' },
-    { locale: 'zh' },
+    { locale: 'th' }
   ];
 }
 
@@ -26,9 +29,7 @@ interface ContactPageProps {
 }
 
 export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
-  // 在静态构建时使用固定语言环境
-  const staticLocale = process.env.GITHUB_PAGES === 'true' ? 'zh-CN' : params.locale;
-  const t = await getTranslations({ locale: staticLocale, namespace: 'contact' });
+  const t = await getTranslations({ locale: params.locale, namespace: 'contact' });
   
   return {
     title: '联系我们 - SpacePlus',
@@ -47,9 +48,12 @@ export default async function ContactPage({ params }: ContactPageProps) {
   const { locale } = params;
   
   // Validate locale
-  if (!['en', 'zh'].includes(locale)) {
+  if (!['zh-CN', 'en', 'th'].includes(locale)) {
     notFound();
   }
+
+  // Enable static rendering
+  setRequestLocale(locale);
 
   return (
     <main className="min-h-screen">

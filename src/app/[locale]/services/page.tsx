@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
@@ -12,9 +13,12 @@ const ContactCTA = dynamic(() => import('@/components/services/ContactCTA'), { s
 
 // 生成静态参数以支持静态导出
 export async function generateStaticParams() {
+  // Return all locales for static generation
+  // next-intl will handle the path generation based on localePrefix setting
   return [
+    { locale: 'zh-CN' },
     { locale: 'en' },
-    { locale: 'zh' },
+    { locale: 'th' }
   ];
 }
 
@@ -24,7 +28,10 @@ export const metadata: Metadata = {
   keywords: ['夜生活管理', '品牌孵化', '项目托管', '娱乐空间', '品牌顾问'],
 };
 
-export default function ServicesPage() {
+export default function ServicesPage({ params: { locale } }: { params: { locale: string } }) {
+  // Enable static rendering
+  setRequestLocale(locale);
+  
   const t = useTranslations('services');
 
   return (

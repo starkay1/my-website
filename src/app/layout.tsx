@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: {
-      'zh-CN': '/zh-CN',
+      'zh-CN': '/zh',
       'en': '/en',
       'th': '/th',
     },
@@ -90,32 +90,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="zh-CN" className={`${inter.variable} ${notoSansSC.variable}`}>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#7A3EFF" />
-        <meta name="msapplication-TileColor" content="#7A3EFF" />
-        <OrganizationSchema />
-        <WebsiteSchema />
-      </head>
-      <body className="antialiased bg-white text-neutral-900">
-        <PerformanceMonitor>
-          {children}
-        </PerformanceMonitor>
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
-        {process.env.NEXT_PUBLIC_OPTIMIZE_ID && (
-          <GoogleOptimize optimizeId={process.env.NEXT_PUBLIC_OPTIMIZE_ID} />
-        )}
-        <UserBehaviorTracker
-          enableHeatmap={process.env.NODE_ENV === 'production'}
-          enableScrollTracking={true}
-          enableClickTracking={true}
-        />
-      </body>
-    </html>
-  );
+  return children;
 }
