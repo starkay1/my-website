@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 导入移动端优化样式 */
+@import '../styles/mobile.css';
+
 /* Quill Editor Styles */
 @import '../styles/quill.css';
 
