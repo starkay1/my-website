@@ -3,7 +3,7 @@ const createNextIntlPlugin = require('next-intl/plugin');
 // 引入polyfills
 require('./polyfills');
 
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+const withNextIntl = createNextIntlPlugin('./src/i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
