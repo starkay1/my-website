@@ -9,7 +9,7 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 const nextConfig = {
   // GitHub Pages 静态导出配置
   output: process.env.GITHUB_PAGES === 'true' ? 'export' : undefined,
-  trailingSlash: process.env.GITHUB_PAGES === 'true',
+  trailingSlash: true, // 始终启用 trailing slash 以确保多语言路由正常工作
   distDir: process.env.GITHUB_PAGES === 'true' ? 'out' : '.next',
   
   // 处理缺失的翻译消息
