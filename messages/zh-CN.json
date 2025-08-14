@@ -106,6 +106,11 @@
   "cases": {
     "title": "案例与成果",
     "subtitle": "真实案例见证专业实力",
+    "meta": {
+      "title": "案例与成果 - SpacePlus",
+      "description": "查看SpacePlus的真实案例与成果，了解我们在夜生活品牌管理领域的专业实力和成功经验。",
+      "keywords": "案例,成果,SpacePlus,夜生活品牌,项目案例,成功案例"
+    },
     "filters": {
       "all": "全部",
       "country": "国家",
@@ -117,6 +122,11 @@
   "about": {
     "title": "关于我们",
     "subtitle": "专业的夜生活品牌管理团队",
+    "meta": {
+      "title": "关于我们 - SpacePlus",
+      "description": "了解SpacePlus专业的夜生活品牌管理团队，我们的发展历程、核心价值观和团队成员。",
+      "keywords": "关于我们,SpacePlus,夜生活品牌,团队介绍,公司历程"
+    },
     "team": {
       "title": "核心团队"
     },
@@ -143,6 +153,11 @@
   "careers": {
     "title": "加入我们",
     "subtitle": "与优秀的人一起成长",
+    "meta": {
+      "title": "加入我们 - SpacePlus",
+      "description": "加入SpacePlus团队，与优秀的人一起成长。了解我们的职位机会、公司文化和福利待遇。",
+      "keywords": "招聘,职位,SpacePlus,加入我们,职业发展,夜生活行业"
+    },
     "flying_consultant": {
       "title": "飞行顾问计划",
       "description": "灵活的合作模式，共享行业机遇"

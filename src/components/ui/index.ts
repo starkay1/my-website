@@ -67,3 +67,6 @@ export type {
 } from './Badge';
 
 export { default as RichTextEditor } from './RichTextEditor';
+
+export { ClientOnly } from './ClientOnly';
+export type { default as ClientOnlyProps } from './ClientOnly';

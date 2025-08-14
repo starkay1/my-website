@@ -142,7 +142,9 @@ export function useAuth() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setUser(null);
-    window.location.href = '/login';
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
   };
 
   const hasRole = (roles: string[]) => {

@@ -1,10 +1,13 @@
 import { useTranslations } from 'next-intl';
-import HeroSection from '@/components/home/HeroSection';
-import TrustSection from '@/components/home/TrustSection';
-import ServicesOverview from '@/components/home/ServicesOverview';
-import FeaturedCases from '@/components/home/FeaturedCases';
-import MethodologySection from '@/components/home/MethodologySection';
-import LeadFormSection from '@/components/home/LeadFormSection';
+import dynamic from 'next/dynamic';
+
+// 动态导入所有组件以避免 SSR 问题
+const HeroSection = dynamic(() => import('@/components/home/HeroSection'), { ssr: false });
+const TrustSection = dynamic(() => import('@/components/home/TrustSection'), { ssr: false });
+const ServicesOverview = dynamic(() => import('@/components/home/ServicesOverview'), { ssr: false });
+const FeaturedCases = dynamic(() => import('@/components/home/FeaturedCases'), { ssr: false });
+const MethodologySection = dynamic(() => import('@/components/home/MethodologySection'), { ssr: false });
+const LeadFormSection = dynamic(() => import('@/components/home/LeadFormSection'), { ssr: false });
 
 export default function HomePage() {
   const t = useTranslations('home');
@@ -40,11 +43,11 @@ export default function HomePage() {
   );
 }
 
-// 为静态导出生成参数
-export async function generateStaticParams() {
-  return [
-    { locale: 'zh-CN' },
-    { locale: 'en' },
-    { locale: 'th' }
-  ];
-}
+// 为静态导出生成参数 - 暂时禁用以避免SSR问题
+// export async function generateStaticParams() {
+//   return [
+//     { locale: 'zh-CN' },
+//     { locale: 'en' },
+//     { locale: 'th' }
+//   ];
+// }

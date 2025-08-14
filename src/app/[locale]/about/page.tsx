@@ -1,17 +1,18 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { 
-  AboutHero,
-  CompanyStory,
-  TeamSection,
-  CompanyValues,
-  Achievements,
-  Timeline,
-  Leadership,
-  OfficeTour
-} from '@/components/about';
+import dynamic from 'next/dynamic';
 import type { Locale } from '@/types';
+
+// 动态导入所有组件以避免 SSR 问题
+const AboutHero = dynamic(() => import('@/components/about').then(mod => ({ default: mod.AboutHero })), { ssr: false });
+const CompanyStory = dynamic(() => import('@/components/about').then(mod => ({ default: mod.CompanyStory })), { ssr: false });
+const TeamSection = dynamic(() => import('@/components/about').then(mod => ({ default: mod.TeamSection })), { ssr: false });
+const CompanyValues = dynamic(() => import('@/components/about').then(mod => ({ default: mod.CompanyValues })), { ssr: false });
+const Achievements = dynamic(() => import('@/components/about').then(mod => ({ default: mod.Achievements })), { ssr: false });
+const Timeline = dynamic(() => import('@/components/about').then(mod => ({ default: mod.Timeline })), { ssr: false });
+const Leadership = dynamic(() => import('@/components/about').then(mod => ({ default: mod.Leadership })), { ssr: false });
+const OfficeTour = dynamic(() => import('@/components/about').then(mod => ({ default: mod.OfficeTour })), { ssr: false });
 
 // 页面属性接口
 interface AboutPageProps {

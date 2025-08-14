@@ -26,6 +26,8 @@ export default function ResponsiveEnhancer({
   const [viewportHeight, setViewportHeight] = useState(0);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const checkDevice = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -47,6 +49,8 @@ export default function ResponsiveEnhancer({
   }, []);
 
   useEffect(() => {
+    if (typeof document === 'undefined') return;
+    
     if (enablePerformanceOptimization) {
       // 启用硬件加速
       document.documentElement.style.setProperty('--enable-hardware-acceleration', 'translateZ(0)');
@@ -62,6 +66,8 @@ export default function ResponsiveEnhancer({
   }, [enablePerformanceOptimization, isMobile]);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    
     if (enableMobileOptimization && isMobile) {
       // 移动端视口优化
       const viewport = document.querySelector('meta[name="viewport"]');
@@ -123,6 +129,8 @@ export function useResponsiveBreakpoint() {
   const [breakpoint, setBreakpoint] = useState<'mobile' | 'tablet' | 'desktop' | 'wide'>('desktop');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const updateBreakpoint = () => {
       const width = window.innerWidth;
       
@@ -153,6 +161,8 @@ export function useMobileDetection() {
   const [isAndroid, setIsAndroid] = useState(false);
 
   useEffect(() => {
+    if (typeof navigator === 'undefined') return;
+    
     const userAgent = navigator.userAgent;
     const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
     const ios = /iPad|iPhone|iPod/.test(userAgent);
@@ -171,6 +181,8 @@ export function useTouchDetection() {
   const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
+    
     const checkTouch = () => {
       setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
     };
@@ -187,6 +199,8 @@ export function useNetworkStatus() {
   const [connectionType, setConnectionType] = useState<string>('unknown');
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
+    
     const updateOnlineStatus = () => setIsOnline(navigator.onLine);
     
     const updateConnectionType = () => {

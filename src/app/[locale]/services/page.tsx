@@ -1,11 +1,14 @@
 import { useTranslations } from 'next-intl';
 import { Metadata } from 'next';
-import ServicesHero from '@/components/services/ServicesHero';
-import ServicesList from '@/components/services/ServicesList';
-import ProcessSection from '@/components/services/ProcessSection';
-import PricingSection from '@/components/services/PricingSection';
-import TestimonialsSection from '@/components/services/TestimonialsSection';
-import ContactCTA from '@/components/services/ContactCTA';
+import dynamic from 'next/dynamic';
+
+// 动态导入所有组件以避免 SSR 问题
+const ServicesHero = dynamic(() => import('@/components/services/ServicesHero'), { ssr: false });
+const ServicesList = dynamic(() => import('@/components/services/ServicesList'), { ssr: false });
+const ProcessSection = dynamic(() => import('@/components/services/ProcessSection'), { ssr: false });
+const PricingSection = dynamic(() => import('@/components/services/PricingSection'), { ssr: false });
+const TestimonialsSection = dynamic(() => import('@/components/services/TestimonialsSection'), { ssr: false });
+const ContactCTA = dynamic(() => import('@/components/services/ContactCTA'), { ssr: false });
 
 export const metadata: Metadata = {
   title: '专业服务 | Spaceplus Worldwide',

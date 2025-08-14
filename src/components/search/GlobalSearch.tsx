@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Search, Filter, X, Clock, TrendingUp, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useDebounce } from '@/components/ui/PerformanceOptimizer';
+import { ClientOnly } from '@/components/ui';
 
 interface SearchResult {
   id: string;
@@ -160,9 +161,10 @@ export default function GlobalSearch({ isOpen, onClose, className }: GlobalSearc
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
+    <ClientOnly fallback={null}>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
           className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -379,6 +381,7 @@ export default function GlobalSearch({ isOpen, onClose, className }: GlobalSearc
         </motion.div>
       )}
     </AnimatePresence>
+    </ClientOnly>
   );
 }
 

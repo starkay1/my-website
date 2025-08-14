@@ -24,8 +24,8 @@ export default function GoogleOptimize({ optimizeId }: GoogleOptimizeProps) {
       // 设置页面隐藏超时（防止闪烁）
       (window as any).gtag('config', OPTIMIZE_ID, {
         optimize_id: OPTIMIZE_ID,
-        page_title: document.title,
-        page_location: window.location.href
+        page_title: typeof document !== 'undefined' ? document.title : '',
+        page_location: typeof window !== 'undefined' ? window.location.href : ''
       });
     }
   }, [OPTIMIZE_ID]);

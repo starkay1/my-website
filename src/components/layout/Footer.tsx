@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ClientOnly } from '@/components/ui';
 
 const Footer = () => {
   const t = useTranslations();
@@ -36,7 +37,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-neutral-900 via-primary-900/10 to-secondary-900/10 border-t border-white/10">
+    <ClientOnly fallback={
+      <footer className="relative bg-gradient-to-br from-neutral-900 via-primary-900/10 to-secondary-900/10 border-t border-white/10">
+        <div className="responsive-container py-16 lg:py-20">
+          <div className="text-center text-neutral-300">
+            <p>© 2024 Spaceplus Worldwide. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    }>
+      <footer className="relative bg-gradient-to-br from-neutral-900 via-primary-900/10 to-secondary-900/10 border-t border-white/10">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl" />
@@ -240,6 +250,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </ClientOnly>
   );
 };
 

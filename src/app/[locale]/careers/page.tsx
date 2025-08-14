@@ -1,11 +1,14 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import CareersHero from '@/components/careers/CareersHero';
-import JobsList from '@/components/careers/JobsList';
-import CompanyCulture from '@/components/careers/CompanyCulture';
-import Benefits from '@/components/careers/Benefits';
-import ApplicationProcess from '@/components/careers/ApplicationProcess';
+import dynamic from 'next/dynamic';
 import type { PageProps } from '@/types';
+
+// 动态导入组件以避免SSR问题
+const CareersHero = dynamic(() => import('@/components/careers/CareersHero'), { ssr: false });
+const JobsList = dynamic(() => import('@/components/careers/JobsList'), { ssr: false });
+const CompanyCulture = dynamic(() => import('@/components/careers/CompanyCulture'), { ssr: false });
+const Benefits = dynamic(() => import('@/components/careers/Benefits'), { ssr: false });
+const ApplicationProcess = dynamic(() => import('@/components/careers/ApplicationProcess'), { ssr: false });
 
 // 生成页面元数据
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

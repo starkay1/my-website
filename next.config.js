@@ -7,12 +7,21 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages 静态导出配置（仅在GitHub Pages部署时启用）
-  ...(process.env.GITHUB_PAGES && { 
-    output: 'export',
-    distDir: 'out'
-  }),
-  trailingSlash: true,
+  // 完全禁用静态导出
+  // output: 'export',
+  // output: undefined,
+  trailingSlash: false,
+  distDir: '.next',
+  
+  // 处理缺失的翻译消息
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+    esmExternals: 'loose',
+    forceSwcTransforms: true,
+    // 强制客户端渲染以避免window.location错误
+    clientRouterFilter: false,
+    serverComponentsExternalPackages: [],
+  },
   
   // 图片配置（GitHub Pages 需要 unoptimized）
   images: {
@@ -27,32 +36,29 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   
-  // 自定义域名配置
-  assetPrefix: process.env.GITHUB_PAGES ? '' : (process.env.NODE_ENV === 'production' ? 'https://spaceplusworldwide.club' : ''),
-  basePath: process.env.NODE_ENV === 'production' ? '' : '',
+  assetPrefix: '',
+  basePath: '',
   
   // 环境变量
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
   
-  // 重定向配置
-  async redirects() {
-    return [
-      {
-        source: '/admin',
-        destination: '/admin/login',
-        permanent: false,
-        has: [
-          {
-            type: 'cookie',
-            key: 'admin-token',
-            value: undefined,
-          },
-        ],
-      },
-    ];
-  },
+
+  
+  // 转译第三方包以解决 SSR 问题
+  transpilePackages: ['framer-motion'],
+  
+  // 重定向配置 - 暂时禁用以解决 window.location 错误
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/admin',
+  //       destination: '/admin/login',
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
   
   // 头部配置
   async headers() {
@@ -97,38 +103,28 @@ const nextConfig = {
   
   // Webpack 配置
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // 修复 'self is not defined' 错误
+    // 在服务器端排除 framer-motion
     if (isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-      };
-      
-      // 添加 self polyfill
-      config.plugins.push(
-        new webpack.DefinePlugin({
-          'typeof self': JSON.stringify('object'),
-          self: 'global',
-        })
-      );
+      config.externals = config.externals || [];
+      config.externals.push('framer-motion');
     }
-    
-    // 生产环境优化 - 暂时禁用vendor分割以避免self错误
-    // if (!dev) {
-    //   config.optimization.splitChunks = {
-    //     chunks: 'all',
-    //     cacheGroups: {
-    //       vendor: {
-    //         test: /[\/]node_modules[\/]/,
-    //         name: 'vendors',
-    //         chunks: 'all',
-    //       },
-    //     },
-    //   };
-    // }
-    
+
+    // 添加全局变量定义
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.__NEXT_GLOBAL_POLYFILL__': JSON.stringify(true),
+        'typeof global': JSON.stringify(isServer ? 'object' : 'undefined'),
+        'typeof window': JSON.stringify(isServer ? 'undefined' : 'object'),
+      })
+    );
+
+    // 提供全局变量 polyfill
+    config.plugins.push(
+      new webpack.ProvidePlugin({
+        global: require.resolve('./polyfills.js'),
+      })
+    );
+
     return config;
   },
 };

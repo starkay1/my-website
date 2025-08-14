@@ -105,18 +105,28 @@
   },
   "cases": {
     "title": "Cases & Results",
-    "subtitle": "Real cases demonstrating professional expertise",
+    "subtitle": "Real cases demonstrate professional strength",
+    "meta": {
+      "title": "Cases & Results - SpacePlus",
+      "description": "View SpacePlus real cases and results, learn about our professional strength and successful experience in nightlife brand management.",
+      "keywords": "cases,results,SpacePlus,nightlife brand,project cases,success stories"
+    },
     "filters": {
       "all": "All",
       "country": "Country",
       "city": "City",
       "type": "Type",
-      "kpi": "Key Metrics"
+      "kpi": "Key Indicators"
     }
   },
   "about": {
     "title": "About Us",
     "subtitle": "Professional nightlife brand management team",
+    "meta": {
+      "title": "About Us - SpacePlus",
+      "description": "Learn about SpacePlus professional nightlife brand management team, our development history, core values and team members.",
+      "keywords": "About Us,SpacePlus,nightlife brand,team introduction,company history"
+    },
     "team": {
       "title": "Core Team"
     },
@@ -142,10 +152,15 @@
   },
   "careers": {
     "title": "Join Us",
-    "subtitle": "Grow with exceptional people",
+    "subtitle": "Grow with excellent people",
+    "meta": {
+      "title": "Join Us - SpacePlus",
+      "description": "Join the SpacePlus team and grow with excellent people. Learn about our job opportunities, company culture and benefits.",
+      "keywords": "recruitment,jobs,SpacePlus,join us,career development,nightlife industry"
+    },
     "flying_consultant": {
       "title": "Flying Consultant Program",
-      "description": "Flexible collaboration model, sharing industry opportunities"
+      "description": "Flexible cooperation model, sharing industry opportunities"
     }
   },
   "contact": {

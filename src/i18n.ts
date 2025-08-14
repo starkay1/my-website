@@ -7,8 +7,35 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? 'zh-CN' 
     : (await requestLocale) || 'zh-CN';
   
+  let messages = {};
+  try {
+    messages = (await import(`../messages/${locale}.json`)).default;
+  } catch (error) {
+    console.warn(`Failed to load messages for locale ${locale}:`, error);
+    // Fallback to empty messages or default locale
+    try {
+      messages = (await import(`../messages/zh-CN.json`)).default;
+    } catch (fallbackError) {
+      console.warn('Failed to load fallback messages:', fallbackError);
+    }
+  }
+  
   return {
     locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
+    messages,
+    onError: (error) => {
+      if (error.code === 'MISSING_MESSAGE') {
+        console.warn('Missing translation:', error.originalMessage);
+        return error.originalMessage;
+      }
+      throw error;
+    },
+    getMessageFallback: ({ namespace, key, error }) => {
+      const path = [namespace, key].filter((part) => part != null).join('.');
+      if (error.code === 'MISSING_MESSAGE') {
+        return path;
+      }
+      throw error;
+    },
   };
 });

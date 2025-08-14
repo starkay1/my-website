@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from '@/types';
@@ -144,33 +143,29 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // 如果提供了 href，渲染为链接
     if (href) {
       return (
-        <motion.a
+        <a
           href={href}
           target={target}
           rel={rel}
           className={baseClasses}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
           {...props}
         >
           {content}
-        </motion.a>
+        </a>
       );
     }
 
     return (
-      <motion.button
+      <button
         ref={ref}
         type={type}
         disabled={isDisabled}
         onClick={onClick}
         className={baseClasses}
-        whileHover={{ scale: isDisabled ? 1 : 1.05 }}
-        whileTap={{ scale: isDisabled ? 1 : 0.95 }}
         {...props}
       >
         {content}
-      </motion.button>
+      </button>
     );
   }
 );

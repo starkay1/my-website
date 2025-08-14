@@ -1,12 +1,15 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import ContactHero from '@/components/contact/ContactHero';
-import ContactForm from '@/components/contact/ContactForm';
-import ContactInfo from '@/components/contact/ContactInfo';
-import ContactMap from '@/components/contact/ContactMap';
-import ContactFAQ from '@/components/contact/ContactFAQ';
-import ContactCTA from '@/components/contact/ContactCTA';
+import dynamic from 'next/dynamic';
+
+// 动态导入所有组件以避免 SSR 问题
+const ContactHero = dynamic(() => import('@/components/contact/ContactHero'), { ssr: false });
+const ContactForm = dynamic(() => import('@/components/contact/ContactForm'), { ssr: false });
+const ContactInfo = dynamic(() => import('@/components/contact/ContactInfo'), { ssr: false });
+const ContactMap = dynamic(() => import('@/components/contact/ContactMap'), { ssr: false });
+const ContactFAQ = dynamic(() => import('@/components/contact/ContactFAQ'), { ssr: false });
+const ContactCTA = dynamic(() => import('@/components/contact/ContactCTA'), { ssr: false });
 
 interface ContactPageProps {
   params: {

@@ -75,7 +75,7 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
+    command: redis-server --appendonly yes
 
   # Nginx 反向代理 (可选)
   nginx:
