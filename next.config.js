@@ -7,19 +7,26 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 已移除过时的 experimental.appDir 配置
+  // GitHub Pages 静态导出配置
+  output: 'export',
+  trailingSlash: true,
+  
+  // 图片配置（GitHub Pages 需要 unoptimized）
   images: {
-    domains: ['localhost'],
+    unoptimized: true,
+    domains: ['localhost', 'spaceplusworldwide.club'],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
   },
+  
   // 生产环境优化
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
   
-  // 输出配置（用于 Docker）
-  output: 'standalone',
+  // 自定义域名配置
+  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://spaceplusworldwide.club' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '' : '',
   
   // 环境变量
   env: {
