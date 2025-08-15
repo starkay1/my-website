@@ -33,6 +33,34 @@ try {
   console.log('Building Next.js application...');
   execSync('npm run build', { stdio: 'inherit' });
   
+  // 创建根路径的 index.html 重定向文件
+  const outDir = path.join(__dirname, '../out');
+  const indexPath = path.join(outDir, 'index.html');
+  
+  if (fs.existsSync(outDir)) {
+    console.log('Creating root index.html redirect...');
+    const indexContent = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpacePlus - 重定向中...</title>
+    <meta http-equiv="refresh" content="0; url=/zh-CN/">
+    <link rel="canonical" href="https://spaceplusworldwide.club/zh-CN/">
+    <script>
+        // 立即重定向到中文页面
+        window.location.replace('/zh-CN/');
+    </script>
+</head>
+<body>
+    <p>正在重定向到 <a href="/zh-CN/">中文页面</a>...</p>
+</body>
+</html>`;
+    
+    fs.writeFileSync(indexPath, indexContent, 'utf8');
+    console.log('Root index.html created successfully!');
+  }
+  
   console.log('Static build completed successfully!');
   
 } catch (error) {
