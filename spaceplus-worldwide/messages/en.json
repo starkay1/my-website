@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "title": "SpacePlus Worldwide - Global Space Investment Experts",
+    "subtitle": "Connecting premium global space resources to create unlimited possibilities for your investment",
+    "cta": "Book Consultation",
+    "downloadBrochure": "Download Brochure"
+  },
+  "stats": {
+    "investment": "Total Investment",
+    "projects": "Projects",
+    "countries": "Countries",
+    "investmentValue": "$5B+",
+    "projectsValue": "200+",
+    "countriesValue": "30+"
+  },
+  "form": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "requirements": "Requirements",
+    "submit": "Submit Inquiry",
+    "namePlaceholder": "Enter your name",
+    "emailPlaceholder": "Enter your email",
+    "phonePlaceholder": "Enter your phone",
+    "requirementsPlaceholder": "Describe your investment requirements and expectations"
+  },
+  "team": {
+    "title": "Professional Team",
+    "subtitle": "Senior investment advisors providing professional services"
+  },
+  "partners": {
+    "title": "Partners"
+  },
+  "footer": {
+    "copyright": "© 2024 SpacePlus Worldwide. All rights reserved."
+  }
+}

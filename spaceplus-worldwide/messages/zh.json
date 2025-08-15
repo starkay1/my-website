@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "title": "SpacePlus Worldwide - 全球空间投资专家",
+    "subtitle": "连接全球优质空间资源，为您的投资创造无限可能",
+    "cta": "预约咨询",
+    "downloadBrochure": "下载招商资料"
+  },
+  "stats": {
+    "investment": "投资总额",
+    "projects": "合作项目",
+    "countries": "覆盖国家",
+    "investmentValue": "50亿+",
+    "projectsValue": "200+",
+    "countriesValue": "30+"
+  },
+  "form": {
+    "title": "联系我们",
+    "name": "姓名",
+    "email": "邮箱",
+    "phone": "电话",
+    "requirements": "需求描述",
+    "submit": "提交咨询",
+    "namePlaceholder": "请输入您的姓名",
+    "emailPlaceholder": "请输入您的邮箱",
+    "phonePlaceholder": "请输入您的电话",
+    "requirementsPlaceholder": "请描述您的投资需求和预期"
+  },
+  "team": {
+    "title": "专业团队",
+    "subtitle": "资深投资顾问为您提供专业服务"
+  },
+  "partners": {
+    "title": "合作伙伴"
+  },
+  "footer": {
+    "copyright": "© 2024 SpacePlus Worldwide. 保留所有权利。"
+  }
+}
