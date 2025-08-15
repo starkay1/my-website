@@ -228,7 +228,7 @@ export class PerformanceOptimizer {
 }
 
 // 导出默认配置
-export default {
+const performanceConfig = {
   imageOptimization,
   fontOptimization,
   resourcePreloading,
@@ -240,3 +240,5 @@ export default {
   prefetchStrategy,
   PerformanceOptimizer
 };
+
+export default performanceConfig;

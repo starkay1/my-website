@@ -2,6 +2,13 @@
 
 import Script from 'next/script';
 
+// Extend Window interface to include gtag
+declare global {
+  interface Window {
+    gtag: (command: string, targetId?: string, config?: Record<string, unknown>) => void;
+  }
+}
+
 interface GoogleAnalyticsProps {
   gaId: string;
 }
@@ -34,8 +41,8 @@ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
 
 // Helper function to track events
 export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', action, {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', action, {
       event_category: category,
       event_label: label,
       value: value,
@@ -45,8 +52,8 @@ export const trackEvent = (action: string, category: string, label?: string, val
 
 // Helper function to track page views
 export const trackPageView = (url: string) => {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
       page_path: url,
     });
   }

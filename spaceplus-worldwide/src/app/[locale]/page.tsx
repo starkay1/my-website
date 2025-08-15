@@ -2,9 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import Image from 'next/image';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
-import { TouchOptimizedButton, LazyImage, PerformanceMonitor, PreloadCriticalResources } from '../../components/MobileOptimization';
+import { TouchOptimizedButton, PerformanceMonitor, PreloadCriticalResources } from '../../components/MobileOptimization';
 
 export default function HomePage() {
   const t = useTranslations();
@@ -35,7 +34,7 @@ export default function HomePage() {
       } else {
         alert('提交失败，请稍后重试。');
       }
-    } catch (error) {
+    } catch {
       alert('提交失败，请稍后重试。');
     } finally {
       setIsSubmitting(false);

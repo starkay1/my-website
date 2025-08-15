@@ -1,6 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+
+// Extend PerformanceEntry interface for layout shift entries
+interface LayoutShiftEntry extends PerformanceEntry {
+  hadRecentInput: boolean;
+  value: number;
+}
 
 // 移动端优化 Hook
 export function useMobileOptimization() {
@@ -96,9 +103,9 @@ export function LazyImage({
   width,
   height
 }: LazyImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const [imgRef, setImgRef] = useState<HTMLImageElement | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [imgRef, setImgRef] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!imgRef) return;
@@ -118,21 +125,17 @@ export function LazyImage({
   }, [imgRef]);
 
   return (
-    <img
-      ref={setImgRef}
-      src={isInView ? src : placeholder}
-      alt={alt}
-      className={`
-        ${className}
-        transition-opacity duration-300
-        ${isLoaded ? 'opacity-100' : 'opacity-0'}
-      `}
-      onLoad={() => setIsLoaded(true)}
-      loading="lazy"
-      decoding="async"
-      width={width}
-      height={height}
-    />
+    <div ref={setImgRef} className={`transition-opacity duration-300 ${className} ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <Image
+        src={isInView ? src : placeholder}
+        alt={alt}
+        width={width || 400}
+        height={height || 300}
+        loading="lazy"
+        className="w-full h-auto"
+        onLoad={() => setIsLoaded(true)}
+      />
+    </div>
   );
 }
 
@@ -163,8 +166,9 @@ export function PerformanceMonitor() {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value;
+          const layoutShiftEntry = entry as LayoutShiftEntry;
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
           }
         }
         console.log('CLS:', clsValue);
