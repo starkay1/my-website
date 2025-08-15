@@ -1,24 +1,31 @@
 'use client';
 
 import Script from 'next/script';
-
-// Extend Window interface to include gtag
-declare global {
-  interface Window {
-    gtag: (command: string, targetId?: string, config?: Record<string, unknown>) => void;
-  }
-}
+import { useEffect } from 'react';
+import { initializeAnalytics, trackPageView } from '@/lib/analytics';
 
 interface GoogleAnalyticsProps {
-  gaId: string;
+  GA_MEASUREMENT_ID: string;
 }
 
-export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
+const GoogleAnalytics = ({ GA_MEASUREMENT_ID }: GoogleAnalyticsProps) => {
+  useEffect(() => {
+    // Initialize analytics after the script loads
+    const timer = setTimeout(() => {
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        initializeAnalytics();
+        trackPageView(window.location.pathname);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
       <Script
         id="google-analytics"
@@ -28,20 +35,23 @@ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${gaId}', {
+            gtag('config', '${GA_MEASUREMENT_ID}', {
               page_title: document.title,
               page_location: window.location.href,
+              send_page_view: false
             });
           `,
         }}
       />
     </>
   );
-}
+};
+
+export default GoogleAnalytics;
 
 // Helper function to track events
 export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,
@@ -50,11 +60,4 @@ export const trackEvent = (action: string, category: string, label?: string, val
   }
 };
 
-// Helper function to track page views
-export const trackPageView = (url: string) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
-      page_path: url,
-    });
-  }
-};
+// Note: trackPageView is imported from @/lib/analytics to avoid conflicts

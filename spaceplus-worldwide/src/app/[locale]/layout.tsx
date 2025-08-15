@@ -5,6 +5,7 @@ import {getMessages} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {locales} from '../../i18n';
 import GoogleAnalytics from '../../components/GoogleAnalytics';
+import SEOHead from '@/components/SEO/SEOHead';
 import '../globals.css';
 import '@/styles/responsive.css';
 
@@ -47,6 +48,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <SEOHead 
+        title="SpacePlus Worldwide - 全球空间投资专家"
+        description="连接全球优质空间资源，为您的投资创造无限可能"
+        locale={locale}
+      />
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#2563eb" />
@@ -78,7 +84,7 @@ export default async function LocaleLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_ID} />
         )}
         <NextIntlClientProvider messages={messages}>
           {children}
